@@ -150,6 +150,7 @@ class _HomepagesState extends State<Homepages> {
                                           .toString() ??
                                       "Null",
                                 ),
+                                Text(state.map2[index]['title'].toString()),
                                 // Text(
                                 //   state.prod.products?[index].description ??
                                 //       "Null",
