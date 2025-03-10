@@ -14,7 +14,7 @@ final class ProductFailed extends ProductState {
 }
 
 final class ProductSucces extends ProductState {
-  final List<ProductModel> prod;
+  final ProductModel prod;
   ProductSucces(this.prod);
 
   List<Object> get props => [prod];

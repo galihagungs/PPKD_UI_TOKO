@@ -6,7 +6,7 @@ class Productservice {
   Productservice(this.url);
 
   final _api = ProductApi();
-  Future<List<ProductModel>?> getData(url) async {
+  Future<ProductModel> getData(url) async {
     return _api.getProductbyUrl(url);
   }
 }

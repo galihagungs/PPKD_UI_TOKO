@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ui_store/bloc/category/category_bloc.dart';
 import 'package:ui_store/bloc/product/product_bloc.dart';
-import 'package:ui_store/models/productModel.dart';
-import 'package:ui_store/services/service/productService.dart';
 
 class Homepages extends StatefulWidget {
   const Homepages({super.key});
@@ -15,19 +13,29 @@ class Homepages extends StatefulWidget {
 }
 
 class _HomepagesState extends State<Homepages> {
-  List<ProductModel>? prodMod;
-  bool isLoaded = false;
+  // List<ProductModel>? prodMod;
+  // bool isLoaded = false;
   // int count = 0;
+  // final DbHelper _helper = new DbHelper();
 
   @override
   void initState() {
     super.initState();
+    // var db = new NewData();
+
     context.read<CategoryBloc>().add(CategoryGet());
   }
 
-  Future<void> loadProduct(String url) async {
-    prodMod = await Productservice(url).getData(url);
-  }
+  // _helper.getData(CountryQuery.TABLE_NAME).then((value) {
+  //     value.forEach((element) {
+  //       Country country = Country.fromJson(element);
+  //       print(country.toJson());
+  //     });
+  //   });
+
+  // Future<void> loadProduct(String url) async {
+  //   prodMod = await Productservice(url).getData(url);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,32 +121,42 @@ class _HomepagesState extends State<Homepages> {
               },
             ),
           ),
-
-          // Expanded(flex: 10, child: Center(child: Text(prodMod.toString()))),
-          // Expanded(
-          //   flex: 10,
-          //   child: ListView.builder(
-          //     itemCount: prodMod?.length ?? 0,
-          //     itemBuilder: (context, index) {
-          //       return Text(prodMod?.length.toString() ?? "Null");
-          //     },
-          //   ),
-          // ),
           Expanded(
             flex: 10,
             child: BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
-                print(state);
+                // print(state);
                 if (state is ProductLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is ProductSucces) {
                   return ListView.builder(
-                    itemCount: state.prod.length,
+                    itemCount: state.prod.total,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(
-                          state.prod[index].products?[index].title ??
-                              'No Title',
+                        title: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Text(
+                                  state.prod.products?[index].id.toString() ??
+                                      "Null",
+                                ),
+                                Text(
+                                  state.prod.products?[index].title
+                                          .toString() ??
+                                      "Null",
+                                ),
+                                // Text(
+                                //   state.prod.products?[index].description ??
+                                //       "Null",
+                                // ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
