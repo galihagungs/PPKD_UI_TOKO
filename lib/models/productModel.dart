@@ -33,9 +33,9 @@ class ProductModel {
 class Products {
   int? id;
   String? title;
-  // String? description;
-  // String? category;
-  // double? price;
+  String? description;
+  String? category;
+  double? price;
   // double? discountPercentage;
   // double? rating;
   // int? stock;
@@ -57,9 +57,9 @@ class Products {
   Products({
     this.id,
     this.title,
-    // this.description,
-    // this.category,
-    // this.price,
+    this.description,
+    this.category,
+    this.price,
     // this.discountPercentage,
     // this.rating,
     // this.stock,
@@ -82,9 +82,9 @@ class Products {
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    // description = json['description'];
-    // category = json['category'];
-    // price = json['price'];
+    description = json['description'];
+    category = json['category'];
+    price = json['price'];
     // discountPercentage = json['discountPercentage'];
     // rating = json['rating'];
     // stock = json['stock'];
@@ -116,9 +116,9 @@ class Products {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
-    // data['description'] = this.description;
-    // data['category'] = this.category;
-    // data['price'] = this.price;
+    data['description'] = this.description;
+    data['category'] = this.category;
+    data['price'] = this.price;
     // data['discountPercentage'] = this.discountPercentage;
     // data['rating'] = this.rating;
     // data['stock'] = this.stock;

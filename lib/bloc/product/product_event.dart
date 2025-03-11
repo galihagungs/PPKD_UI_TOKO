@@ -6,7 +6,10 @@ sealed class ProductEvent {
   List<Object> get props => [];
 }
 
-class ProductGetbyUrl extends ProductEvent {
-  final String url;
-  const ProductGetbyUrl(this.url);
+class ProductGetbyCat extends ProductEvent {
+  // final String url;
+  final String catName;
+  const ProductGetbyCat(this.catName);
 }
+
+class GetProductAll extends ProductEvent {}

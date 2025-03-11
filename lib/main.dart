@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ui_store/bloc/category/category_bloc.dart';
 import 'package:ui_store/bloc/product/product_bloc.dart';
-import 'package:ui_store/pages/dummyhomepage.dart';
 import 'package:ui_store/pages/homepages.dart';
-import 'package:ui_store/pages/sqlhome.dart';
+import 'package:ui_store/pages/introscreen.dart';
+import 'package:ui_store/pages/loginpages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
         routes: {
-          '/': (context) => Dummyhomepage(),
+          '/': (context) => IntroScreen(),
+          '/login': (context) => Loginpages(),
           '/home': (context) => Homepages(),
-          '/homeSQL': (context) => Sqlhome(),
         },
       ),
     );

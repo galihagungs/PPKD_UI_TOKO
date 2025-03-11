@@ -8,3 +8,5 @@ sealed class CategoryEvent {
 }
 
 class CategoryGet extends CategoryEvent {}
+
+class CategoryGetAPI extends CategoryEvent {}

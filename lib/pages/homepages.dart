@@ -13,41 +13,97 @@ class Homepages extends StatefulWidget {
 }
 
 class _HomepagesState extends State<Homepages> {
-  // List<ProductModel>? prodMod;
-  // bool isLoaded = false;
-  // int count = 0;
-  // final DbHelper _helper = new DbHelper();
-
   @override
   void initState() {
     super.initState();
-    // var db = new NewData();
-
-    context.read<CategoryBloc>().add(CategoryGet());
+    // context.read<CategoryBloc>().add(CategoryGet());
   }
-
-  // _helper.getData(CountryQuery.TABLE_NAME).then((value) {
-  //     value.forEach((element) {
-  //       Country country = Country.fromJson(element);
-  //       print(country.toJson());
-  //     });
-  //   });
-
-  // Future<void> loadProduct(String url) async {
-  //   prodMod = await Productservice(url).getData(url);
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Home Pages",
+          "Inventory",
           style: TextStyle(fontFamily: "Kanit", fontSize: 25),
         ),
+        centerTitle: true,
       ),
       body: Column(
         children: [
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Container(
+                      color: Colors.white,
+                      child: Icon(Icons.person),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Selamat Datang, User",
+                    style: TextStyle(fontFamily: "Kanit", fontSize: 15),
+                  ),
+                ],
+              ),
+              IconButton(onPressed: () {}, icon: Icon(Icons.logout)),
+            ],
+          ),
+          SizedBox(height: 25),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 7,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
+                      ),
+                      hintText: "Search",
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Color(0xFFC4C4C4),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Color(0xFFC4C4C4),
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      prefixIcon: Icon(Icons.search_rounded),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.app_settings_alt),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           Expanded(
             child: BlocConsumer<CategoryBloc, CategoryState>(
               listener: (context, state) {
@@ -77,20 +133,15 @@ class _HomepagesState extends State<Homepages> {
                       return GestureDetector(
                         onTap: () {
                           context.read<ProductBloc>().add(
-                            ProductGetbyUrl(
-                              state.cattegory[index].url.toString(),
-                            ),
+                            ProductGetbyCat(state.cattegory[index]['name']),
                           );
-                          // setState(() {
-                          //   loadProduct(state.cattegory[index].url.toString());
-                          // });
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             width: 150,
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 113, 210, 255),
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
@@ -103,7 +154,7 @@ class _HomepagesState extends State<Homepages> {
                             ),
                             child: Center(
                               child: Text(
-                                state.cattegory[index].name.toString(),
+                                state.cattegory[index]['name'],
                                 style: TextStyle(
                                   fontFamily: "Kanit",
                                   fontSize: 15,
@@ -130,7 +181,7 @@ class _HomepagesState extends State<Homepages> {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is ProductSucces) {
                   return ListView.builder(
-                    itemCount: state.prod.total,
+                    itemCount: state.map2.length,
                     itemBuilder: (context, index) {
                       return ListTile(
                         title: Container(
@@ -141,20 +192,10 @@ class _HomepagesState extends State<Homepages> {
                           child: Center(
                             child: Column(
                               children: [
-                                Text(
-                                  state.prod.products?[index].id.toString() ??
-                                      "Null",
-                                ),
-                                Text(
-                                  state.prod.products?[index].title
-                                          .toString() ??
-                                      "Null",
-                                ),
+                                Text(state.map2[index]['id'].toString()),
                                 Text(state.map2[index]['title'].toString()),
-                                // Text(
-                                //   state.prod.products?[index].description ??
-                                //       "Null",
-                                // ),
+                                Text(state.map2[index]['category'].toString()),
+                                Text(state.map2[index]['price'].toString()),
                               ],
                             ),
                           ),

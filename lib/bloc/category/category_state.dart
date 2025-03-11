@@ -14,7 +14,7 @@ final class CategoryFailed extends CategoryState {
 }
 
 final class CategorySucces extends CategoryState {
-  final List<CategoryModel> cattegory;
+  final List<Map<String, dynamic>> cattegory;
   CategorySucces(this.cattegory);
 
   List<Object> get props => [cattegory];
